@@ -45,12 +45,12 @@ class   UsersController {
 
         $user = App::get('database')->getOneByField('users',$_POST);
 
-        //if the user already exists or there is a missing input field, it will redirect to /users without creating a new account
+
         if($user OR $pass == '' or $_POST['name'] == '' OR $_POST['email'] == ''){
             return redirect('/users');
         }
 
-        //creating hashed password
+
         $salt = substr(md5(time()),0,22);
         $_POST['password'] = crypt($pass,'$2a$10$'.$salt);
 
@@ -87,7 +87,7 @@ class   UsersController {
     {
         check_auth();
 
-        //sanitization and validation
+
         $_POST['id'] = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
 
         if(!filter_var($_POST['id'],FILTER_VALIDATE_INT)){
